@@ -1,10 +1,8 @@
-Official implementation of the paper "Enhancing Occluded X-Ray Security Screening via Collaborative Optimization and Representation Learning" (The Visual Computer).
-
-# MCB-Convex + CoordAtt-U (DvXray Dual-View Multi-Label)
+# MCB-U
 
 Official PyTorch implementation of:
 
-**MCB-Convex and CoordAtt-U: A Collaborative Optimization-Representation Framework for Occluded X-Ray Security Screening**  
+**Enhancing Occluded X-Ray Security Screening via Collaborative Optimization and Representation Learning**  
 (*submitted to* **The Visual Computer**)
 
 This repository targets **dual-view image-level multi-label classification** on **DvXray**.

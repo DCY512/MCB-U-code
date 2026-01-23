@@ -1,4 +1,5 @@
 Official implementation of the paper "Enhancing Occluded X-Ray Security Screening via Collaborative Optimization and Representation Learning" (The Visual Computer).
+
 # MCB-Convex + CoordAtt-U (DvXray Dual-View Multi-Label)
 
 Official PyTorch implementation of:
@@ -102,41 +103,35 @@ conda activate v2b384
 
 ---
 
-## Project Layout
+## Project Layout (Key Components)
 
 ```text
-.
-├── annotations/                 # train/val lists + class names
-├── bash/                        # optional helper scripts (if used)
-├── models/                      # model definitions + modules
-├── tools/                       # weight mapping / utilities
-├── .gitmodules                  # git submodules (if any)
-├── CODE_OF_CONDUCT.md
-├── CONTRIBUTING.md
-├── LICENSE
-├── README.md
-├── convert_all_no_head.sh        # convert official weights -> backbone-only safetensors
-├── datasets.py                   # DvXray dual-view dataset loader
-├── engine_finetune.py            # training loop (finetune)
-├── engine_pretrain.py            # optional pretraining loop
-├── environment.yml               # conda environment specification
-├── eval.py                       # evaluation (offline)
-├── eval_only.py                  # evaluation-only entry
-├── main.sh                       # batch experiments launcher
-├── main_finetune.py              # main entry: finetune / reproduce paper setting
-├── main_pretrain.py              # optional pretraining entry
-├── optim_factory.py              # optimizer helpers
-├── submitit_finetune.py          # cluster submission helper (finetune)
-├── submitit_pretrain.py          # cluster submission helper (pretrain)
-└── utils.py                      # logging / distributed utils
+MCB-U-code/
+├── README.md                          # this file
+├── environment.yml                    # reproducible Conda environment
+├── main_finetune.py                   # main training entrypoint
+├── convert_all_no_head.sh             # convert official weights to backbone only
+├── annotations/                       # dataset splits & class names
+│   ├── DvXray_train.txt
+│   ├── DvXray_val.txt
+│   ├── DvXray_test.txt
+│   └── classes.txt
+├── models/
+│   ├── convnextv2_dual.py             # dual-view ConvNeXtV2 backbone
+│   ├── fpn.py                         # FPN multi-scale aggregator
+│   └── necks.py                       # FPN–PAN neck modules
+├── models/modules/custom_losses/
+│   ├── mcb_loss.py                    # MCB-Convex loss
+│   └── attentions.py                  # CoordAtt-U attention
+└── tools/
+    └── map_official_v2_weights.py     # official weight mapping tool
 ```
 
 > Notes  
 > - `.idea/` is an IDE directory and can be ignored for reproduction.  
 > - The two core algorithm implementations are located in `models/...`:
->   - `MCBLossConvex` (MCB-Convex)  
->   - `CoordAtt_U` (CoordAtt-U)
-
+>   - `mcb_loss` (MCB-Convex)  
+>   - `attentions` (CoordAtt-U)
 
 ---
 
@@ -263,6 +258,7 @@ Please obtain the dataset from its official release and follow its license/terms
 - Contributions are welcome; see **CONTRIBUTING.md**.
 - Licensing information is provided in **LICENSE**.
 
+---
 
 ## Citation
 
